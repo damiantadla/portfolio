@@ -25,27 +25,18 @@ jobs:
         run: |
           cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
           npm install  # Instalacja zależności
+
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to VPS
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_IP }}  # Adres IP serwera VPS
-          username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
-          password: ${{ secrets.VPS_PASSWORD }}  # Hasło do VPS
-          port: 22
-          script: |
-            echo "Files in the portfolio directory:"
-            ls -la /home/ftpuser/var/www/portfolio/frontend/portfolio
-          source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
-          target: "/home/ftpuser/var/www/portfolio/frontend/portfolio"  # Ścieżka docelowa na VPS
-          tar_tmp_path: "/tmp"  # Tymczasowa lokalizacja dla tar
-          tar_dereference: true
-          debug: true
-          overwrite: true
+      - name: Deploy to VPS using rsync
+        run: |
+          # Przesyłanie plików z użyciem rsync
+          sshpass -p "${{ secrets.VPS_PASSWORD }}" rsync -avz --delete \
+            ./frontend/portfolio/ \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
