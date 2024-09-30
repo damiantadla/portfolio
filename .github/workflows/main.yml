@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
           port: 22
-          source: "frontend"  # Przesyłaj tylko folder frontend
+          source: "frontend/portfolio"   # Przesyłaj tylko folder frontend
           target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
 
       - name: Execute deployment script
