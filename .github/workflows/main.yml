@@ -23,20 +23,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
-          npm install  # Instalacja zależności
+          npm install  # Instalacja zależności w głównym katalogu
 
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
-      - name: List root directory
-        run: ls -al  # Ponownie wyświetl katalogi w głównym folderze roboczym
-
-      - name: List files in frontend
-        run: ls -al frontend  # Wyświetl zawartość katalogu frontend
-
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -44,7 +37,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
           port: 22
-          source: "frontend/portfolio"  # Przesyłaj folder portfolio
+          source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
           target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
 
       - name: Execute deployment script
@@ -55,6 +48,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
+            cd /home/ftpuser/var/www/portfolio/frontend  # Przejdź do katalogu aplikacji
             npm install --production  # Zainstaluj zależności produkcyjne
             pm2 restart app  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
