@@ -19,11 +19,12 @@ jobs:
           node-version: '20'  # Użyj Node.js w wersji 20
 
       - name: List directory contents
-        run: ls -al  # Debugowanie: wyświetl zawartość katalogu
+        run: ls -al frontend  # Wyświetl zawartość katalogu 'frontend' jako debugowanie
 
       - name: Install dependencies
         run: |
           cd frontend  # Przejdź do katalogu, gdzie znajduje się package.json
+          ls -al  # Wyświetl zawartość katalogu, aby upewnić się, że package.json jest w tym miejscu
           npm install  # Instalacja zależności
 
       - name: Run tests
@@ -43,7 +44,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
           port: 22
-          source: "."  # Może być "." lub "frontend" jeśli chcesz przesłać tylko ten folder
+          source: "frontend"  # Przesyłaj tylko folder frontend
           target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
 
       - name: Execute deployment script
