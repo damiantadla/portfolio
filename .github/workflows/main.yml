@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main  # Uruchamiaj pipeline po pushu do gałęzi 'main'
 
 jobs:
   build:
@@ -11,42 +11,46 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Klonuje repozytorium
 
       - name: List root directory
-        run: ls -al
+        run: ls -al  # Wyświetl katalogi w głównym folderze roboczym
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # Użyj Node.js w wersji 20
 
       - name: Install dependencies
         run: |
-          cd frontend/portfolio
-          npm install
-
+          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
+          npm install  # Instalacja zależności
   deploy:
-    needs: build
+    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to VPS using rsync
-        run: |
-          sudo apt-get install -y rsync  # Zainstaluj rsync, jeśli nie jest dostępny
-          rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no -p 22" \
-            frontend/portfolio/ \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_IP }}  # Adres IP serwera VPS
+          username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
+          password: ${{ secrets.VPS_PASSWORD }}  # Hasło do VPS
+          port: 22
+          source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
+          target: "/home/ftpuser/var/www/portfolio/frontend/portfolio"  # Ścieżka docelowa na VPS
+          tar_tmp_path: "/tmp"  # Tymczasowa lokalizacja dla tar
+          tar_dereference: true
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
+          password: ${{ secrets.VPS_PASSWORD }}  # Użyj hasła zamiast klucza
           port: 22
           script: |
-            cd /home/ftpuser/var/www/portfolio/frontend/portfolio
-            npm install --production
-            pm2 restart 0
+            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
+            npm install --production  # Zainstaluj zależności produkcyjne
+            pm2 list 
+            pm2 restart 0   # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
