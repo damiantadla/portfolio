@@ -16,6 +16,12 @@ jobs:
       - name: List root directory
         run: ls -al  # Wyświetl katalogi w głównym folderze roboczym
 
+      - name: List contents of portfolio directory
+        run: ls -al ./portfolio
+
+      - name: List contents of frontend directory
+        run: ls -al ./portfolio/frontend
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -36,14 +42,10 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
 
-      - name: List full directory structure
-        run: ls -R /home/runner/work/portfolio/
-
       - name: Deploy to VPS using rsync
         run: |
-          # Przesyłanie plików z użyciem rsync
           sshpass -p "${{ secrets.VPS_PASSWORD }}" rsync -avz --delete \
-            ./frontend/portfolio/ \
+            ./portfolio/frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
       - name: Execute deployment script
