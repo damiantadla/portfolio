@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Akcja checkout jest kompatybilna z node20
+        uses: actions/checkout@v3  # Klonuje repozytorium
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -19,25 +19,34 @@ jobs:
           node-version: '20'  # Użyj Node.js w wersji 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Instalacja zależności
 
       - name: Run tests
-        run: npm test  # zamień na odpowiednie testy dla Twojego projektu
+        run: npm test  # Uruchom testy
 
   deploy:
-    needs: build
+    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/scp-action@v0.1.4  # Możesz użyć akcji SCP do skopiowania plików na VPS
+        with:
+          host: ${{ secrets.VPS_IP }}  # Adres IP serwera VPS
+          username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
+          key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
+          port: 22
+          source: "."
+          target: "/path/to/your/app/on/vps"  # Ścieżka docelowa na VPS
+
+      - name: Execute deployment script
+        uses: appleboy/ssh-action@v0.1.4  # Wykonaj skrypt na VPS
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /path/to/project
-            git pull origin main
-            npm install --production
-            pm2 restart app  # zamień na komendę do restartu twojej aplikacji
+            cd /path/to/your/app/on/vps  # Przejdź do katalogu aplikacji
+            npm install --production  # Zainstaluj zależności produkcyjne
+            pm2 restart app  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
