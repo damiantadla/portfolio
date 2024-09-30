@@ -37,6 +37,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           password: ${{ secrets.VPS_PASSWORD }}  # Hasło do VPS
           port: 22
+          script: |
+            echo "Files in the portfolio directory:"
+            ls -la /home/ftpuser/var/www/portfolio/frontend/portfolio
           source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
           target: "/home/ftpuser/var/www/portfolio/frontend/portfolio"  # Ścieżka docelowa na VPS
           tar_tmp_path: "/tmp"  # Tymczasowa lokalizacja dla tar
