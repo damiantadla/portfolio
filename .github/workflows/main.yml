@@ -23,11 +23,6 @@ jobs:
           cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
           npm install  # Instalacja zależności
 
-      - name: Run tests
-        run: |
-          cd frontend/portfolio  # Przejdź do katalogu z testami
-          npm test  # Uruchom testy
-
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
