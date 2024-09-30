@@ -53,4 +53,4 @@ jobs:
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
             npm install --production  # Zainstaluj zależności produkcyjne
-            pm2 restart app  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
+            pm2 restart next-app   # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
