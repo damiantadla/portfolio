@@ -18,39 +18,42 @@ jobs:
         with:
           node-version: '20'  # Użyj Node.js w wersji 20
 
-      - name: List directory contents
-        run: ls -al frontend  # Wyświetl zawartość katalogu 'frontend' jako debugowanie
-
       - name: Install dependencies
         run: |
-          ls 
           cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
-          ls -al  # Wyświetl zawartość katalogu, aby upewnić się, że package.json jest w tym miejscu
           npm install  # Instalacja zależności
+
+      - name: Run tests
+        run: |
+          cd frontend/portfolio  # Przejdź do katalogu z testami
+          npm test  # Uruchom testy
 
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
+      - name: List files in frontend/portfolio
+        run: ls -al frontend/portfolio  # Wyświetl zawartość katalogu, aby upewnić się, że pliki są dostępne
+
       - name: Deploy to VPS
-        uses: appleboy/scp-action@v0.1.4  # Możesz użyć akcji SCP do skopiowania plików na VPS
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}  # Adres IP serwera VPS
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
           port: 22
-          source: "frontend/portfolio"   # Przesyłaj tylko folder frontend
+          source: "frontend/portfolio"  # Przesyłaj folder portfolio
           target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
 
       - name: Execute deployment script
-        uses: appleboy/ssh-action@v0.1.4  # Wykonaj skrypt na VPS
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/ftpuser/var/www/portfolio/frontend  # Przejdź do katalogu aplikacji
+            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
             npm install --production  # Zainstaluj zależności produkcyjne
             pm2 restart app  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
