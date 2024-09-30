@@ -36,7 +36,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_IP }}  # Adres IP serwera VPS
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
-          key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
+          password: ${{ secrets.VPS_PASSWORD }}  # Hasło do VPS
           port: 22
           source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
           target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
@@ -46,7 +46,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}  # Użyj hasła zamiast klucza
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend  # Przejdź do katalogu aplikacji
