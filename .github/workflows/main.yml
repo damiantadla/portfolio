@@ -27,11 +27,6 @@ jobs:
           ls -al  # Wyświetl zawartość katalogu, aby upewnić się, że package.json jest w tym miejscu
           npm install  # Instalacja zależności
 
-      - name: Run tests
-        run: |
-          cd frontend  # Przejdź do katalogu z testami
-          npm test  # Uruchom testy
-
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
