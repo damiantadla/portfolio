@@ -36,6 +36,13 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
 
+      - name: List directory structure
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files and directories:"
+          ls -R
+
       - name: Deploy to VPS using rsync
         run: |
           # Przesyłanie plików z użyciem rsync
