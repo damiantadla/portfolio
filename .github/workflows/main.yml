@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend  # Przejdź do katalogu, gdzie znajduje się package.json
+          ls 
+          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
           ls -al  # Wyświetl zawartość katalogu, aby upewnić się, że package.json jest w tym miejscu
           npm install  # Instalacja zależności
 
