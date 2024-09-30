@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Akcja checkout jest kompatybilna z node20
 
-      - name: Set up Node.js (lub Python, PHP, itp.)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # Użyj Node.js w wersji 20
 
       - name: Install dependencies
         run: npm install
