@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install  # Instalacja zależności w głównym katalogu
+          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
+          npm install  # Instalacja zależności
 
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
