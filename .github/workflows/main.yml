@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # uruchamiaj pipeline po pushu do gałęzi 'main'
+      - main  # Uruchamiaj pipeline po pushu do gałęzi 'main'
 
 jobs:
   build:
@@ -18,11 +18,18 @@ jobs:
         with:
           node-version: '20'  # Użyj Node.js w wersji 20
 
+      - name: List directory contents
+        run: ls -al  # Debugowanie: wyświetl zawartość katalogu
+
       - name: Install dependencies
-        run: npm install  # Instalacja zależności
+        run: |
+          cd frontend  # Przejdź do katalogu, gdzie znajduje się package.json
+          npm install  # Instalacja zależności
 
       - name: Run tests
-        run: npm test  # Uruchom testy
+        run: |
+          cd frontend  # Przejdź do katalogu z testami
+          npm test  # Uruchom testy
 
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
@@ -36,8 +43,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}  # Użytkownik na VPS
           key: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny SSH
           port: 22
-          source: "."
-          target: "/path/to/your/app/on/vps"  # Ścieżka docelowa na VPS
+          source: "."  # Może być "." lub "frontend" jeśli chcesz przesłać tylko ten folder
+          target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4  # Wykonaj skrypt na VPS
@@ -47,6 +54,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /path/to/your/app/on/vps  # Przejdź do katalogu aplikacji
+            cd /home/ftpuser/var/www/portfolio/frontend  # Przejdź do katalogu aplikacji
             npm install --production  # Zainstaluj zależności produkcyjne
             pm2 restart app  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
