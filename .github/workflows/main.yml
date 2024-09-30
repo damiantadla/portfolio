@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}  # Hasło do VPS
           port: 22
           source: "."  # Przesyłaj wszystkie pliki z głównego katalogu
-          target: "/home/ftpuser/var/www/portfolio/frontend"  # Ścieżka docelowa na VPS
+          target: "/home/ftpuser/var/www/portfolio/frontend/portfolio"  # Ścieżka docelowa na VPS
           tar_tmp_path: "/tmp"  # Tymczasowa lokalizacja dla tar
           tar_dereference: true
 
