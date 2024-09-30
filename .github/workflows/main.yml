@@ -41,6 +41,8 @@ jobs:
           target: "/home/ftpuser/var/www/portfolio/frontend/portfolio"  # Ścieżka docelowa na VPS
           tar_tmp_path: "/tmp"  # Tymczasowa lokalizacja dla tar
           tar_dereference: true
+          debug: true
+          overwrite: true
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
