@@ -41,15 +41,17 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-
+      - name: Add server to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
       - name: Deploy to VPS using rsync
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          sudo sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete --exclude='.next' -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
-
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
         with:
@@ -59,6 +61,6 @@ jobs:
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
-            npm install --production
+            npm ci --production  # Use npm ci for a clean install
             pm2 list
             pm2 restart 1
