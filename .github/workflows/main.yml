@@ -27,7 +27,7 @@ jobs:
           npm install  # Instalacja zależności
 
   deploy:
-    needs: build  # Upewnij się, że etap budowy zakończył się pomyślniee
+    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
@@ -38,12 +38,11 @@ jobs:
 
       - name: Deploy to VPS using rsync
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.VPS_PRIVATE_KEY }}
+          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          # Konfiguracja ssh-agent i dodanie klucza prywatnego
-          echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null
-          # Przesyłanie plików z użyciem rsync
-          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+          # Użycie rsync z hasłem
+          RSYNC_PASSWORD="${VPS_PASSWORD}" \
+          rsync -avz --delete -e "sshpass -p ${VPS_PASSWORD} ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
@@ -52,7 +51,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}  # Użyj klucza zamiast hasła
+          password: ${{ secrets.VPS_PASSWORD }}  # Logowanie za pomocą hasła
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
