@@ -1,44 +1,79 @@
-name: Deploy to VPS
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main  # Gałąź, którą chcesz monitorować
+      - main  # Uruchamiaj pipeline po pushu do gałęzi 'main'
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3  # Klonuje repozytorium
 
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+      - name: List root directory
+        run: ls -al  # Wyświetl katalogi w głównym folderze roboczym
 
-      - name: Copy files to VPS
-        run: |
-          rsync -avz --exclude='.git' --exclude='node_modules' ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/ftpuser/var/www/portfolio/frontend/portfolio
-
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Zmień na wersję Node.js, której używasz
+          node-version: '20'  # Użyj Node.js w wersji 20
 
-      - name: Install dependencies and build
+      - name: Install dependencies
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'cd /home/ftpuser/var/www/portfolio/frontend/portfolio && npm install && npm run build'
+          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
+          npm install  # Instalacja zależności
 
-      - name: Install PM2 globally (jeśli nie jest zainstalowany)
-        run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'which pm2 || npm install -g pm2'
+      - name: Upload frontend/portfolio as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-portfolio
+          path: frontend/portfolio  # Ścieżka do przesłania jako artefakt
 
-      - name: Restart application with PM2
-        run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'cd /home/ftpuser/var/www/portfolio/frontend/portfolio && pm2 reload ecosystem.config.js --env production'
+  deploy:
+    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
+    runs-on: ubuntu-latest
 
-      - name: Save PM2 process list
+    steps:
+      - name: Download frontend/portfolio artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-portfolio
+          path: frontend/portfolio  # Ścieżka, gdzie artefakt zostanie pobrany
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Add server to known hosts
         run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'pm2 save'
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
+
+      - name: Run SSH Agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Upewnij się, że ta nazwa jest poprawna
+
+      - name: Deploy to VPS using rsync
+        env:
+          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+        run: |
+          # Przesyłanie plików z użyciem rsync z hasłem
+          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+            ./frontend/portfolio/ \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
+
+      - name: Execute deployment script
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}  # Logowanie za pomocą hasła
+          port: 22
+          script: |
+            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
+            npm install --production  # Zainstaluj zależności produkcyjne
+            pm2 list 
+            pm2 restart 1  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
