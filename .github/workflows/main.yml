@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Uruchamiaj pipeline po pushu do gałęzi 'main'
+      - main
 
 jobs:
   build:
@@ -11,24 +11,24 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Klonuje repozytorium
+        uses: actions/checkout@v3
 
       - name: List root directory
-        run: ls -al  # Wyświetl katalogi w głównym folderze roboczym
+        run: ls -al
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Użyj Node.js w wersji 20
+          node-version: '20'
 
       - name: Upload frontend/portfolio as artifact
         uses: actions/upload-artifact@v3
         with:
           name: frontend-portfolio
-          path: frontend/portfolio  # Ścieżka do przesłania jako artefakt
+          path: frontend/portfolio
 
   deploy:
-    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: frontend-portfolio
-          path: frontend/portfolio  # Ścieżka, gdzie artefakt zostanie pobrany
+          path: frontend/portfolio
 
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
@@ -50,7 +50,6 @@ jobs:
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          # Przesyłanie plików z użyciem rsync z hasłem
           sudo sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
@@ -60,10 +59,10 @@ jobs:
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}  # Logowanie za pomocą hasła
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
-            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
-            npm install --production  # Zainstaluj zależności produkcyjne
-            pm2 list 
-            pm2 restart 1  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
+            cd /home/ftpuser/var/www/portfolio/frontend/portfolio
+            npm install --production
+            pm2 list
+            pm2 restart 1
