@@ -73,4 +73,4 @@ jobs:
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
             npm ci --production  # Use npm ci for a clean install
             pm2 list
-            pm2 restart 1
+            pm2 restart 0
