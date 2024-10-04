@@ -56,6 +56,12 @@ jobs:
           sshpass -p "${VPS_PASSWORD}" rsync -avz --delete --exclude='.next' -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
+          
+      - name: Build Next.js application
+        run: |
+          cd /home/ftpuser/var/www/portfolio/frontend/portfolio
+          npm run build  # Budowanie aplikacji Next.js przed restartem
+
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
         with:
