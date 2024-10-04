@@ -26,11 +26,26 @@ jobs:
           cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
           npm install  # Instalacja zależności
 
+      - name: Upload frontend/portfolio as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-portfolio
+          path: frontend/portfolio  # Ścieżka do przesłania jako artefakt
+
   deploy:
     needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download frontend/portfolio artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-portfolio
+          path: frontend/portfolio  # Ścieżka, gdzie artefakt zostanie pobrany
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
@@ -40,9 +55,8 @@ jobs:
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          # Użycie rsync z hasłem
-          RSYNC_PASSWORD="${VPS_PASSWORD}" \
-          rsync -avz --delete -e "sshpass -p ${VPS_PASSWORD} ssh -o StrictHostKeyChecking=no" \
+          # Przesyłanie plików z użyciem rsync z hasłem
+          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
