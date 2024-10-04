@@ -51,7 +51,7 @@ jobs:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
           # Przesyłanie plików z użyciem rsync z hasłem
-          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+          sudo sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
