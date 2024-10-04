@@ -1,84 +1,44 @@
-name: CI/CD Pipeline
+name: Deploy to VPS
 
 on:
   push:
     branches:
-      - main  # Uruchamiaj pipeline po pushu do gałęzi 'main'
+      - main  # Gałąź, którą chcesz monitorować
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Klonuje repozytorium
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: List root directory
-        run: ls -al  # Wyświetl katalogi w głównym folderze roboczym
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Set up Node.js
+      - name: Copy files to VPS
+        run: |
+          rsync -avz --exclude='.git' --exclude='node_modules' ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/ftpuser/var/www/portfolio/frontend/portfolio
+
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Użyj Node.js w wersji 20
+          node-version: '16'  # Zmień na wersję Node.js, której używasz
 
-      - name: Install dependencies
+      - name: Install dependencies and build
         run: |
-          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
-          npm install  # Instalacja zależności
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'cd /home/ftpuser/var/www/portfolio/frontend/portfolio && npm install && npm run build'
 
-      - name: Build frontend
+      - name: Install PM2 globally (jeśli nie jest zainstalowany)
         run: |
-          cd frontend/portfolio
-          npm run build  # Zbuduj aplikację frontendową (upewnij się, że masz odpowiedni skrypt w package.json)
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'which pm2 || npm install -g pm2'
 
-      - name: Upload frontend/portfolio as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-portfolio
-          path: frontend/portfolio/build  # Ścieżka do przesłania jako artefakt (zakładając, że build jest w folderze 'build')
-
-  deploy:
-    needs: build  # Upewnij się, że etap budowy zakończył się pomyślnie
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download frontend/portfolio artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: frontend-portfolio
-          path: ./artifact/frontend/portfolio  # Ścieżka, gdzie artefakt zostanie pobrany
-
-      - name: List downloaded artifact
+      - name: Restart application with PM2
         run: |
-          echo "Listing contents of ./artifact/frontend/portfolio:"
-          ls -al ./artifact/frontend/portfolio/
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'cd /home/ftpuser/var/www/portfolio/frontend/portfolio && pm2 reload ecosystem.config.js --env production'
 
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
-
-      - name: Add server to known hosts
+      - name: Optional: Save PM2 process list
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
-
-      - name: Deploy to VPS using rsync
-        env:
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
-        run: |
-          # Przesyłanie plików z użyciem rsync z hasłem
-          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
-            ./artifact/frontend/portfolio/build/ \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
-
-      - name: Execute deployment script
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}  # Logowanie za pomocą hasła
-          port: 22
-          script: |
-            cd /home/ftpuser/var/www/portfolio/frontend/portfolio  # Przejdź do katalogu aplikacji
-            npm install --production  # Zainstaluj zależności produkcyjne
-            pm2 list 
-            pm2 restart your_app_name  # Uruchom aplikację na nowo (przy założeniu, że używasz PM2)
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'pm2 save'
