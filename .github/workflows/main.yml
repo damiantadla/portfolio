@@ -50,7 +50,7 @@ jobs:
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          sshpass -p "${VPS_PASSWORD}" rsync -avz --delete --exclude='.next' -e "ssh -o StrictHostKeyChecking=no" \
+          sudo sshpass -p "${VPS_PASSWORD}" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
@@ -63,6 +63,6 @@ jobs:
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
-            npm ci --production  # Use npm ci for a clean install
+            npm install --production
             pm2 list
             pm2 restart 1
