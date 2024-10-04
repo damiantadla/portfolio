@@ -51,11 +51,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
 
-      - name: Run SSH Agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Upewnij się, że ta nazwa jest poprawna
-
       - name: Deploy to VPS using rsync
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
