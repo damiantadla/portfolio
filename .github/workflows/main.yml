@@ -39,6 +39,6 @@ jobs:
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'cd /home/ftpuser/var/www/portfolio/frontend/portfolio && pm2 reload ecosystem.config.js --env production'
 
-      - name: Optional: Save PM2 process list
+      - name: Save PM2 process list
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'pm2 save'
