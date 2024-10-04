@@ -21,11 +21,6 @@ jobs:
         with:
           node-version: '20'  # Użyj Node.js w wersji 20
 
-      - name: Install dependencies
-        run: |
-          cd frontend/portfolio  # Przejdź do katalogu, gdzie znajduje się package.json
-          npm install  # Instalacja zależności
-
       - name: Upload frontend/portfolio as artifact
         uses: actions/upload-artifact@v3
         with:
