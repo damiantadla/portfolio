@@ -44,7 +44,11 @@ jobs:
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "Scanning for server: ${{ secrets.VPS_IP }}"
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
       - name: Deploy to VPS using rsync
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
