@@ -18,8 +18,7 @@ export const metadata: Metadata = {
   description: "Damian Tadla - an experienced Full Stack Developer specializing in building modern web applications and developing user interfaces.",
   icons: {
     icon: {
-      url: "/test.png",
-      type: "image/png",
+      url: "/favicon.ico",
     },
   }
 };
