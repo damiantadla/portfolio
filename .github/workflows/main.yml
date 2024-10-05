@@ -64,17 +64,6 @@ jobs:
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
-      - name: Set permissions for .next directory
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          port: 22
-          script: |
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S chown -R ftpuser:www-data /home/ftpuser/var/www/portfolio/frontend/portfolio/.next
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S chmod -R 775 /home/ftpuser/var/www/portfolio/frontend/portfolio/.next
-
       - name: Build Next.js application
         uses: appleboy/ssh-action@v0.1.4
         with:
