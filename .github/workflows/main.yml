@@ -38,9 +38,6 @@ jobs:
           name: frontend-portfolio
           path: frontend/portfolio
 
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
-
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
@@ -56,22 +53,10 @@ jobs:
           script: |
             mkdir -p /home/ftpuser/var/www/portfolio/frontend/portfolio
 
-      - name: Change permissions for .next directory
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }} # Użyj klucza SSH
-          port: 22
-          script: |
-            sudo chmod -R 755 /home/ftpuser/var/www/portfolio/frontend/portfolio/.next
-
       - name: Deploy to VPS using rsync
-        env:
-          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
         run: |
-          sshpass -p "${VPS_PASSWORD}" sudo rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -i ${{ secrets.VPS_SSH_KEY }}" \
-            ./frontend/portfolio/ \
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.VPS_SSH_KEY }} \
+            -avz --delete ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
 
       - name: Build Next.js application
