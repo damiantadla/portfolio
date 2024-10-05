@@ -56,6 +56,16 @@ jobs:
           script: |
             mkdir -p /home/ftpuser/var/www/portfolio/frontend/portfolio
 
+      - name: Change permissions for .next directory
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            sudo chmod -R 755 /home/ftpuser/var/www/portfolio/frontend/portfolio/.next
+
       - name: Deploy to VPS using rsync
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
