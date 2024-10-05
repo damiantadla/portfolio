@@ -38,45 +38,46 @@ jobs:
           name: frontend-portfolio
           path: frontend/portfolio
 
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
-
       - name: Ensure the deployment directory exists
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }} # Użyj klucza SSH
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
             mkdir -p /home/ftpuser/var/www/portfolio/frontend/portfolio
-
       - name: Deploy to VPS using rsync
+        env:
+          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.VPS_SSH_KEY }} \
-            -avz --delete ./frontend/portfolio/ \
+          sshpass -p "${VPS_PASSWORD}" sudo rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+            ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
-
       - name: Build Next.js application
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }} # Użyj klucza SSH
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
             npm install 
             npm run build
-
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }} # Użyj klucza SSH
+          password: ${{ secrets.VPS_PASSWORD }}
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
