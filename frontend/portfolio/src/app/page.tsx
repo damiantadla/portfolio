@@ -45,7 +45,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Read our docsssssssss
+            Read our docs
           </a>
         </div>
       </main>
@@ -93,7 +93,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
+          Go to tadla.me →
         </a>
       </footer>
     </div>
