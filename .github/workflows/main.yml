@@ -46,6 +46,16 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VPS_IP }} >> ~/.ssh/known_hosts
 
+      - name: Ensure the deployment directory exists
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            mkdir -p /home/ftpuser/var/www/portfolio/frontend/portfolio
+
       - name: Deploy to VPS using rsync
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
@@ -53,11 +63,17 @@ jobs:
           sshpass -p "${VPS_PASSWORD}" rsync -avz --delete --exclude='.next' -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
-          
+
       - name: Build Next.js application
-        run: |
-          cd /home/ftpuser/var/www/portfolio/frontend/portfolio
-          npm run build  # Budowanie aplikacji Next.js przed restartem
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            cd /home/ftpuser/var/www/portfolio/frontend/portfolio
+            npm run build  # Budowanie aplikacji Next.js przed restartem
 
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
