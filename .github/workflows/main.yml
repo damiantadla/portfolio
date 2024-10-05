@@ -85,8 +85,6 @@ jobs:
           port: 22
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
-            npm install
-            npm run build
             pm2 list
             pm2 stop portfolio-app || true
             pm2 delete portfolio-app || true
