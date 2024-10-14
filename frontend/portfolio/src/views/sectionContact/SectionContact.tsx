@@ -29,8 +29,6 @@ const SectionContact = () => {
                     <textarea
                         placeholder="Your Message"
                         className="w-full p-2 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition resize-none"
-                        cols="30"
-                        rows="5"
                     ></textarea>
 
                     {/* Submit Button */}
