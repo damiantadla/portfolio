@@ -58,9 +58,10 @@ jobs:
         env:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
-          sshpass -p "${VPS_PASSWORD}" sudo rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" \
+          sshpass -p "${VPS_PASSWORD}" sudo rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
             ./frontend/portfolio/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }}:/home/ftpuser/var/www/portfolio/frontend/portfolio/
+
       - name: Build Next.js application
         uses: appleboy/ssh-action@v0.1.4
         with:
