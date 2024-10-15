@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Damian Tadla - Full Stack developer",
+  title: "Damian Tadla - Full Stack Developer",
   description: "Damian Tadla - an experienced Full Stack Developer specializing in building modern web applications and developing user interfaces.",
   icons: {
     icon: {

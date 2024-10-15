@@ -29,12 +29,7 @@ export default function Home() {
               <section className="h-[50vh] bg-white">
 
               </section>
-              <section className="h-[10vh] bg-orange rounded-[20px]">
 
-              </section>
-              <section className="h-[80vh] bg-white rounded-[20px]">
-
-              </section>
               <FooterView/>
           </main>
 
