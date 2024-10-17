@@ -1,0 +1,16 @@
+.swiper {
+    width: 100%;
+}
+
+.swiper-slide {
+
+    background: none;
+    text-align: center;
+    transition: transform 0.3s ease; /* Dodanie efektu przejścia */
+}
+
+/* Użycie, aby przesunąć slajdy na zewnątrz */
+.swiper-slide:not(.swiper-slide-active) {
+    transform: scale(0.9); /* Zmniejsza nieaktywne slajdy */
+    opacity: 0.5; /* Zmniejsza przezroczystość nieaktywnych slajdów */
+}
