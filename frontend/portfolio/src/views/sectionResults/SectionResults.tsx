@@ -5,55 +5,55 @@ import "swiper/css";
 import Image from "next/image";
 import "./styles.css";
 
-const StartSvg = () => {
+const StartSvg = ({ color = "#FD853A", width = 32, height = 33 }) => {
     return (
         <svg
-            width="32"
-            height="33"
+            width={width}
+            height={height}
             viewBox="0 0 32 33"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="mr-1" // Add right margin here
+            className="mr-1"
         >
             <path
                 d="M23.8912 20.0095C23.5459 20.3442 23.3872 20.8282 23.4659 21.3028L24.6512 27.8628C24.7512 28.4188 24.5165 28.9815 24.0512 29.3028C23.5952 29.6362 22.9885 29.6762 22.4912 29.4095L16.5858 26.3295C16.3805 26.2202 16.1525 26.1615 15.9192 26.1548H15.5578C15.4325 26.1735 15.3099 26.2135 15.1979 26.2748L9.29118 29.3695C8.99918 29.5162 8.66852 29.5682 8.34452 29.5162C7.55518 29.3668 7.02852 28.6148 7.15785 27.8215L8.34452 21.2615C8.42318 20.7828 8.26452 20.2962 7.91918 19.9562L3.10452 15.2895C2.70185 14.8988 2.56185 14.3122 2.74585 13.7828C2.92452 13.2548 3.38052 12.8695 3.93118 12.7828L10.5578 11.8215C11.0619 11.7695 11.5045 11.4628 11.7312 11.0095L14.6512 5.02284C14.7205 4.88951 14.8099 4.76685 14.9179 4.66285L15.0378 4.56951C15.1005 4.50018 15.1725 4.44285 15.2525 4.39618L15.3979 4.34285L15.6245 4.24951H16.1859C16.6872 4.30151 17.1285 4.60151 17.3592 5.04951L20.3179 11.0095C20.5312 11.4455 20.9459 11.7482 21.4245 11.8215L28.0512 12.7828C28.6112 12.8628 29.0792 13.2495 29.2645 13.7828C29.4392 14.3175 29.2885 14.9042 28.8779 15.2895L23.8912 20.0095Z"
-                fill="#FD853A"
+                fill={color}
             />
         </svg>
     );
-}
+};
 
 const SectionResults = () => {
     const slidesData = [
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 1",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 2",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 3",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 4",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 5",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
         {
-            src: "./avatar.svg",
+            src: "/avatar.svg",
             title: "Example 6",
-            description: "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis."
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim."
         },
     ];
 
@@ -66,30 +66,27 @@ const SectionResults = () => {
                             Testimonials That Speak to <span className="text-orange">My Results</span>
                         </h1>
                         <p className="hidden md:block mt-4 max-w-full sm:max-w-[90%] md:max-w-[80%] sm:text-sm text-lg mx-auto">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a
-                            dignissim.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas
-                            lobortis.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim.
                         </p>
                     </div>
 
                     <Swiper
                         watchSlidesProgress={true}
-                        slidesPerView={1} // Default to 1 view for small screens
+                        slidesPerView={1}
                         centeredSlides={true}
                         spaceBetween={30}
                         initialSlide={1}
                         breakpoints={{
                             640: {
-                                slidesPerView: 1, // One slide for small screens
+                                slidesPerView: 1,
                                 spaceBetween: 20,
                             },
                             768: {
-                                slidesPerView: 2, // Two slides for medium screens
+                                slidesPerView: 2,
                                 spaceBetween: 30,
                             },
                             1024: {
-                                slidesPerView: 3, // Three slides for large screens
+                                slidesPerView: 3,
                                 spaceBetween: 30,
                             },
                         }}
@@ -98,16 +95,13 @@ const SectionResults = () => {
                         {slidesData.map((slide, index) => (
                             <SwiperSlide key={index}>
                                 <div className="mx-4">
-                                    <div
-                                        className="flex flex-col w-full h-[280px] bg-white bg-opacity-15 text-white p-2 rounded-[24px]">
+                                    <div className="flex flex-col w-full h-[280px] bg-white bg-opacity-15 text-white p-2 rounded-[24px]">
                                         <div className="flex justify-between m-4">
                                             <div className="flex items-center space-x-2 md:space-x-4">
-                                                <Image src={slide.src} alt={slide.title} width={54} height={54}
-                                                       className="flex-shrink-0"/>
+                                                <Image src={slide.src} alt={slide.title} width={54} height={54} loading="lazy" className="flex-shrink-0" />
                                                 <div className="text-start">
-                                                    <p className="text-base sm:text-lg md:text-xl">{slide.title}</p> {/* Responsive font size */}
-                                                    <p className="text-sm sm:text-base">UI/UX
-                                                        Designer</p> {/* Responsive font size */}
+                                                    <p className="text-base sm:text-lg md:text-xl">{slide.title}</p>
+                                                    <p className="text-sm sm:text-base">UI/UX Designer</p>
                                                 </div>
                                             </div>
                                             <svg
@@ -130,15 +124,15 @@ const SectionResults = () => {
                                             </svg>
                                         </div>
                                         <div className="flex items-center ml-2">
-                                            <StartSvg/>
-                                            <StartSvg/>
-                                            <StartSvg/>
-                                            <StartSvg/>
-                                            <StartSvg/>
+                                            <StartSvg />
+                                            <StartSvg />
+                                            <StartSvg />
+                                            <StartSvg />
+                                            <StartSvg />
                                             <p className="text-2xl ml-1">5.0</p>
                                         </div>
 
-                                        <p className="text-start m-3 mt-4 text-sm md:text-base break-words">{slide.description}</p> {/* Added break-words for text wrapping */}
+                                        <p className="text-start m-3 mt-4 text-sm md:text-base break-words">{slide.description}</p>
                                     </div>
                                 </div>
                             </SwiperSlide>
