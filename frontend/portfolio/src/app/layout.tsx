@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NavComponent from "@/components/nav/NavComponent";
+import SectionSendEmail from "@/views/sectionSendEmail/SectionSendEmail";
+import FooterView from "@/views/footer/FooterView";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,7 +36,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+      <NavComponent />
         {children}
+      <SectionSendEmail/>
+      <FooterView/>
       </body>
     </html>
   );

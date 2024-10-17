@@ -5,6 +5,8 @@ import SectionWorkExp from "@/views/sectionWorkExp/SectionWorkExp";
 import SectionMyServices from "@/views/sectionMyServices/SectionMyServices";
 import FooterView from "@/views/footer/FooterView";
 import SectionContact from "@/views/sectionContact/SectionContact";
+import SectionSendEmail from "@/views/sectionSendEmail/SectionSendEmail";
+import SectionResults from "@/views/SectionResults/SectionResults";
 
 export default function Home() {
 
@@ -20,17 +22,8 @@ export default function Home() {
               <section className="h-[100vh] bg-white">
 
               </section>
-              <section className="relative h-[70vh]  bg-[rgba(0,0,0,0.5)] rounded-[40px] z-10">
-                  <div
-                      className="absolute inset-0 rounded-[40px] bg-back-pattern bg-center bg-cover bg-no-repeat z-0">
 
-                  </div>
-              </section>
-              <section className="h-[50vh] bg-white">
-
-              </section>
-
-              <FooterView/>
+              <SectionResults/>
           </main>
 
       </>
