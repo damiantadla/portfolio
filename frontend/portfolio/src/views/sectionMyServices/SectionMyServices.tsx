@@ -25,15 +25,15 @@ const SectionMyServices = () => {
                     <div
                         className="w-full flex flex-col sm:flex-row sm:items-center xl:mx-auto justify-between text-white  mb-20 max-w-screen-xl px-6 sm:px-20 lg:px-0">
                         <motion.h2
-                            className="text-5xl sm:text-5xl"
-                            initial={{opacity: 0, y: 50}} // Początkowe właściwości
-                            animate={isVisible ? {opacity: 1, y: 0} : {}} // Animacja, gdy widać
-                            transition={{duration: 0.5}} // Czas trwania animacji
+                            className="text-5xl sm:text-6xl"
+                            initial={{opacity: 0, y: 50}}
+                            animate={isVisible ? {opacity: 1, y: 0} : {}}
+                            transition={{duration: 0.5}}
                         >
                             My <span className="text-orange">Services</span>
                         </motion.h2>
                         <motion.p
-                            className="w-[300px] xl:w-[400px] mt-4"
+                            className="w-[300px] xl:w-[450px] mt-4 xl:text-2xl "
                             initial={{opacity: 0, y: 50}}
                             animate={isVisible ? {opacity: 1, y: 0} : {}}
                             transition={{duration: 0.5, delay: 0.2}}
@@ -47,14 +47,14 @@ const SectionMyServices = () => {
                         <motion.div
                             initial={{opacity: 0, scale: 0.8}}
                             animate={isVisible ? {opacity: 1, scale: 1} : {}}
-                            transition={{duration: 0.5, delay: 0.3}}
+                            transition={{duration: 0.5, delay: 0.5}}
                         >
                             <ServicesComponent/>
                         </motion.div>
                         <motion.div
                             initial={{opacity: 0, scale: 0.8}}
                             animate={isVisible ? {opacity: 1, scale: 1} : {}}
-                            transition={{duration: 0.5, delay: 0.3}}
+                            transition={{duration: 0.5, delay: 0.5}}
                         >
                             <ServicesComponent/>
                         </motion.div>
@@ -62,7 +62,7 @@ const SectionMyServices = () => {
                             className="md:col-span-2 xl:col-span-1"
                             initial={{opacity: 0, scale: 0.8}}
                             animate={isVisible ? {opacity: 1, scale: 1} : {}}
-                            transition={{duration: 0.5, delay: 0.3}}
+                            transition={{duration: 0.5, delay: 0.5}}
                         >
                             <ServicesComponent/>
                         </motion.div>

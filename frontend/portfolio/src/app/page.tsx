@@ -6,7 +6,8 @@ import SectionMyServices from "@/views/sectionMyServices/SectionMyServices";
 import FooterView from "@/views/footer/FooterView";
 import SectionContact from "@/views/sectionContact/SectionContact";
 import SectionSendEmail from "@/views/sectionSendEmail/SectionSendEmail";
-import SectionResults from "@/views/SectionResults/SectionResults";
+import SectionResults from "@/views/sectionResults/SectionResults";
+import SectionPortfolio from "@/views/sectionPortfolio/SectionPortfolio";
 
 export default function Home() {
 
@@ -19,9 +20,8 @@ export default function Home() {
               <SectionWorkExp/>
 
               <SectionContact/>
-              <section className="h-[100vh] bg-white">
 
-              </section>
+              <SectionPortfolio/>
 
               <SectionResults/>
           </main>

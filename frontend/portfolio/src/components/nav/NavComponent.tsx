@@ -22,9 +22,17 @@ const NavComponent = () => {
                     <li className={`flex-grow mx-auto text-center ${pathname === '/services' ? 'bg-orange m-4 py-4 rounded-full' : ''}`}>
                         <Link href="/services">Service</Link>
                     </li>
-                    <li className="flex justify-center w-60 items-center mx-auto">
-                        <Image src={Logo} alt="Logo" className="w-12" />
-                        <h1 className="font-bold text-2xl tracking-widest ml-2">TADLA</h1>
+                    <li className="flex justify-center w-60 items-center mx-auto group">
+                        <Image src={Logo} alt="Logo" className="w-12"/>
+                        <div className="flex flex-col justify-center">
+                            <span
+                                className="ml-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-500 ease-in-out text-sm font-light">
+                            Created by
+                             </span>
+                            <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-1">
+                                TADLA
+                            </h1>
+                        </div>
                     </li>
                     <li className={`flex-grow mx-auto text-center ${pathname === '/resume' ? 'bg-orange m-4 py-4 rounded-full' : ''}`}>
                         <Link href="/resume">Resume</Link>

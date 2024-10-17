@@ -2,7 +2,7 @@ import HeaderView from "@/views/header/HeaderView";
 import SectionMyServices from "@/views/sectionMyServices/SectionMyServices";
 import SectionWorkExp from "@/views/sectionWorkExp/SectionWorkExp";
 import SectionContact from "@/views/sectionContact/SectionContact";
-import SectionResults from "@/views/SectionResults/SectionResults";
+import SectionResults from "@/views/sectionResults/SectionResults";
 
 export default function Home() {
 
