@@ -58,14 +58,14 @@ const SectionResults = () => {
     ];
 
     return (
-        <section className="relative h-[70vh] bg-[rgba(0,0,0,0.5)] rounded-[40px] z-10">
+        <section className="relative h-[70vh] md:h-[60vh] bg-[rgba(0,0,0,0.5)] rounded-[40px] z-10">
             <div className="absolute inset-0 rounded-[40px] bg-back-pattern bg-center bg-cover bg-no-repeat z-0 text-white">
                 <div className="h-full flex flex-col items-center justify-center">
-                    <div className="max-w-7xl md:flex mx-auto mb-2 md:mb-20">
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal md:text-4xl max-w-full sm:max-w-[50%]">
+                    <div className="flex justify-between max-w-7xl md:flex mx-auto mb-2 md:mb-20">
+                        <h1 className="text-4xl sm:text-5xl font-semibold lg:text-6xl  md:text-4xl max-w-full sm:max-w-[50%] text-center md:text-start">
                             Testimonials That Speak to <span className="text-orange">My Results</span>
                         </h1>
-                        <p className="hidden md:block mt-4 max-w-full sm:max-w-[90%] md:max-w-[80%] sm:text-sm text-lg mx-auto">
+                        <p className="hidden md:block w-[300px] xl:w-[450px] mt-4 xl:text-2xl">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a dignissim.
                         </p>
                     </div>

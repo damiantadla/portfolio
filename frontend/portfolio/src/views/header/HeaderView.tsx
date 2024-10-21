@@ -7,6 +7,8 @@ import QuoteIcon from "../../../public/quote-up.png";
 import StarsIcon from "../../../public/Frame4.png";
 import Elipse from "../../../public/Ellipse.png";
 
+import Foto from "../../../public/damiablack.png";
+
 const HeaderView = () => {
     // Definicja animacji
     const headerAnimation = {
@@ -69,13 +71,16 @@ const HeaderView = () => {
                 </motion.div>
             </div>
             <motion.div
-                className="hidden xl:flex justify-center w-full mt-auto absolute bottom-0" // Flex container for centering Elipse
+                className="flex justify-center w-full mt-auto absolute bottom-0" // Flex container for centering Elipse
                 initial="hidden"
                 animate="visible"
                 variants={headerAnimation}
                 transition={{ duration: 0.5, delay: 0.6 }}
             >
-                <Image src={Elipse} alt="Elipse" />
+                <div className="relative w-screen h-screen">
+                    <Image src={Foto} alt="Foto"  className="absolute left-1/2 transform -translate-x-1/2 z-20 bottom-0 w-[450px] md:w-[600px] rounded-b-md"/>
+                    <Image src={Elipse} alt="Elipse" className="w-[1000px] hidden md:block absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10"/>
+                </div>
             </motion.div>
         </header>
     );

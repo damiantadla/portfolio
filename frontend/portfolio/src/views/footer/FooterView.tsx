@@ -11,10 +11,11 @@ import ErrorIcon from "@mui/icons-material/Error";
 import SnackbarContent from "@mui/material/SnackbarContent";
 import {IconButton} from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const LineSvg = () => {
     return (
-        <svg className="hidden md:block my-10" xmlns="http://www.w3.org/2000/svg" width="1300" height="3" viewBox="0 0 1300 3" fill="none">
+        <svg className="hidden xl:block my-10" xmlns="http://www.w3.org/2000/svg" width="1300" height="3" viewBox="0 0 1300 3" fill="none">
             <path d="M1 1.08105H1299" stroke="#475467" strokeWidth="2" strokeLinecap="round"/>
         </svg>
     );
@@ -54,6 +55,7 @@ const FooterView = () => {
         });
     };
 
+
     const sendEmail = async () => {
         if (!validationEmail(email)) {
             setStateSnack({
@@ -66,6 +68,7 @@ const FooterView = () => {
 
         try {
             setLoading(true);
+
             await addDoc(collection(firestore, 'emails'), {
                 email: email,
                 createdAt: serverTimestamp(),
@@ -224,7 +227,7 @@ const FooterView = () => {
 
                             </div>
                         </div>
-                        <div className="hidden md:block">
+                        <div className="hidden xl:block">
                             <h2 className="text-orange mb-4">Navigation</h2>
                             <ul>
                                 <li className="py-2 hover:text-orange duration-300">
@@ -271,19 +274,22 @@ const FooterView = () => {
                             <div className="flex">
                                 <input type="text" placeholder="Email Address"
                                        className="placeholder:text-lightBlack text-lightBlack text-sm py-2 px-4 focus rounded-l-[14px] focus:outline-none focus:border-none" onChange={handleChange} onKeyPress={handleKeyPress} value={email} />
-                                <button className="bg-orange p-2 rounded-r-[14px]">
-                                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" className=""
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.29602 3.48708C3.91012 2.38589 1.36183 4.66673 2.19279 7.15964L3.45424 10.9007C3.59136 11.3074 3.97267 11.5812 4.40182 11.5812H13C13.5523 11.5812 14 12.0289 14 12.5812C14 13.1335 13.5523 13.5812 13 13.5812H4.40182C3.97267 13.5812 3.59136 13.855 3.45424 14.2617L2.19281 18.0028C1.36183 20.4957 3.91012 22.7765 6.29603 21.6754L20.0983 15.3051C22.422 14.2326 22.422 10.9299 20.0983 9.85737L6.29602 3.48708Z"
-                                            fill="#FCFCFD"/>
-                                    </svg>
+                                <button className="flex items-center justify-center bg-orange p-2 rounded-r-[14px]" onClick={sendEmail}>
+                                    {
+                                        loading ? <CircularProgress size={24} color="inherit"/> :
+                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" className=""
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.29602 3.48708C3.91012 2.38589 1.36183 4.66673 2.19279 7.15964L3.45424 10.9007C3.59136 11.3074 3.97267 11.5812 4.40182 11.5812H13C13.5523 11.5812 14 12.0289 14 12.5812C14 13.1335 13.5523 13.5812 13 13.5812H4.40182C3.97267 13.5812 3.59136 13.855 3.45424 14.2617L2.19281 18.0028C1.36183 20.4957 3.91012 22.7765 6.29603 21.6754L20.0983 15.3051C22.422 14.2326 22.422 10.9299 20.0983 9.85737L6.29602 3.48708Z"
+                                                    fill="#FCFCFD"/>
+                                            </svg>
+                                    }
                                 </button>
                             </div>
                         </div>
                     </div>
                     <LineSvg/>
-                    <div className="flex flex-col md:flex-row justify-between items-end font-normal mt-6 pb-4">
+                    <div className="flex flex-col md:flex-row justify-between items-end font-normal mt-6 pb-4 text-end">
                         <p>Copyright© 2024 Damian Tadla. All Rights Reserved.</p>
                         <div>
                             <a href="#">Privacy Policy</a>

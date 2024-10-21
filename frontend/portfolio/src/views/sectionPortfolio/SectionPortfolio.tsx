@@ -66,8 +66,7 @@ const SectionPortfolio = () => {
     };
 
     return (
-        <section className="flex flex-col items-center justify-center min-h-[80vh] lg:h-[90vh] bg-white max-w-7xl mx-auto px-4 lg:px-0 py-20">
-            {/* Header Section */}
+        <section className="flex flex-col items-center justify-center min-h-[60vh] lg:h-[90vh] bg-white max-w-7xl mx-auto px-4 lg:px-0 py-20">
             <div className="flex flex-col lg:flex-row justify-between items-center mb-8 lg:mb-16 w-full">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center lg:text-left mb-8 lg:mb-0 lg:w-1/2">
                     Let's have a look at my{" "}
@@ -78,8 +77,7 @@ const SectionPortfolio = () => {
                 </button>
             </div>
 
-
-            <div className="my-10 lg:my-20 w-full min-h-[560px] xl:min-h-[460px]"> {/* Dodana minimalna wysokość */}
+            <div className="my-10 lg:my-20 w-full min-h-[560px] xl:min-h-[460px]">
                 <AnimatePresence>
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 justify-items-center items-center">
                         {filteredTechnologies.map((tech, index) => (
