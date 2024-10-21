@@ -15,12 +15,12 @@ const FooterView = () => {
     return (
         <section className="max-w-screenh-[685px] bg-[#272727] rounded-t-[20px] text-[#FCFCFD]">
             <div className="max-w-7xl mx-auto px-4">
-                <div className="hidden md:flex flex-col md:flex-row items-center justify-between py-12 md:py-16 group">
+                <div className="hidden md:flex flex-col md:flex-row items-center justify-between py-12 md:py-16">
                     <h1 className="text-4xl md:text-6xl font-semibold">
                         Lets Connect there
                     </h1>
                     <button
-                        className="hidden md:flex w-[202px] items-center justify-center bg-orange px-[20px] py-[10px] rounded-[60px]">
+                        className="hidden md:flex w-[202px] items-center justify-center bg-orange px-[20px] py-[10px] rounded-[60px] group">
                         <p className="text-2xl">Hire me</p>
                         <svg
                             width="43"
@@ -148,7 +148,7 @@ const FooterView = () => {
                     <div>
                         <h2 className="text-orange mb-6">Get the latest information</h2>
                         <div className="flex">
-                        <input type="text" placeholder="Email Address" className="placeholder:text-lightBlack text-lightBlack py-2 px-4 focus rounded-l-[14px] focus:outline-none focus:border-none"/>
+                        <input type="text" placeholder="Email Address" className="placeholder:text-lightBlack text-lightBlack text-sm py-2 px-4 focus rounded-l-[14px] focus:outline-none focus:border-none"/>
                             <button className="bg-orange p-2 rounded-r-[14px]">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" className=""
                                      xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +161,7 @@ const FooterView = () => {
                     </div>
                 </div>
                 <LineSvg/>
-                <div className="flex flex-col md:flex-row justify-between items-end font-normal mt-6">
+                <div className="flex flex-col md:flex-row justify-between items-end font-normal mt-6 pb-4">
                     <p>Copyright© 2024 Damian Tadla. All Rights Reserved.</p>
                     <div>
                         <a href="#">Privacy Policy</a>

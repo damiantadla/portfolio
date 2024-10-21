@@ -1,13 +1,13 @@
 const SectionSendEmail = () => {
     return (
-        <section className="flex flex-col items-center justify-center mx-auto h-auto bg-white max-w-5xl my-10 px-4 sm:px-6 my-12 md:my-32">
+        <section className="flex flex-col items-center justify-center mx-auto h-auto bg-white max-w-5xl px-4 sm:px-6 my-12 md:my-32">
             <div className="text-4xl sm:text-6xl font-semibold text-center">
                 <h1>Have an Awesome Project Idea? <span className="text-orange">Let’s Discuss</span></h1>
             </div>
             <div className="w-full mt-4">
                 <div className="flex items-center justify-between mt-4  px-2 md:px-3 rounded-[50px] border-[1px] border-solid border-[#E4E7EC]">
                     <div className="flex flex-grow items-center">
-                        <div className="flex items-center justify-center my-1 h-[58px] w-[58px] bg-[#FFEAD5] rounded-[50px]">
+                        <div className="flex items-center justify-center my-2 h-[54px] w-[58px] bg-[#FFEAD5] rounded-[50px]">
                             <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22.6666 4.74756H9.33329C5.33329 4.74756 2.66663 6.74756 2.66663 11.4142V20.7476C2.66663 25.4142 5.33329 27.4142 9.33329 27.4142H22.6666C26.6666 27.4142 29.3333 25.4142 29.3333 20.7476V11.4142C29.3333 6.74756 26.6666 4.74756 22.6666 4.74756ZM23.2933 12.8676L19.12 16.2009C18.24 16.9076 17.12 17.2542 16 17.2542C14.88 17.2542 13.7466 16.9076 12.88 16.2009L8.70663 12.8676C8.27996 12.5209 8.21329 11.8809 8.54663 11.4542C8.89329 11.0276 9.51996 10.9476 9.94663 11.2942L14.12 14.6276C15.1333 15.4409 16.8533 15.4409 17.8666 14.6276L22.04 11.2942C22.4666 10.9476 23.1066 11.0142 23.44 11.4542C23.7866 11.8809 23.72 12.5209 23.2933 12.8676Z" fill="#FD853A"/>
                             </svg>
@@ -15,7 +15,7 @@ const SectionSendEmail = () => {
                         <input className="ml-4 placeholder:text-black focus:outline-none focus:border-none text-sm md:text-xl flex-grow" type="text" placeholder="Enter Email Address"/>
                     </div>
 
-                        <button className="px-[20px] py-[10px] md:px-[40px] md:py-[20px]  bg-orange rounded-[50px] text-white">
+                        <button className="px-[20px] py-[14px] md:px-[40px] md:py-[16px]  bg-orange rounded-[50px] text-white">
                             Send
                         </button>
 
