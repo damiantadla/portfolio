@@ -1,15 +1,91 @@
+"use client";
+
 import Image from "next/image";
 import Foto from "../../../public/damiablack.png";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { firestore } from '@/firebase';
+import { addDoc, collection, serverTimestamp } from "@firebase/firestore";
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import CircularProgress from '@mui/material/CircularProgress';
+import { IconButton } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+
+const validationEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
+
+interface State {
+    open: boolean;
+    message: string;
+    severity: 'success' | 'error' | 'info';
+}
 
 const SectionContact = () => {
     const ref = useRef(null);
-    const inView = useInView(ref, { once: true });
 
-    const fadeInUp = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+    // State variables
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
+    const [stateSnack, setStateSnack] = useState<State>({
+        open: false,
+        message: '',
+        severity: 'error',
+    });
+
+    const handleClose = () => {
+        setStateSnack({ open: false, message: '', severity: 'error' });
+    };
+
+    const sendEmail = async () => {
+        console.log('Send email', name, email, message);
+        if (!validationEmail(email)) {
+            setStateSnack({
+                open: true,
+                message: 'Invalid email address',
+                severity: 'error',
+            });
+            return;
+        }
+
+        if (!name || !message) {
+            setStateSnack({
+                open: true,
+                message: 'Please fill in all fields',
+                severity: 'error',
+            });
+            return;
+        }
+
+        try {
+            setLoading(true);
+            await addDoc(collection(firestore, 'emails'), {
+                name: name,
+                email: email,
+                message: message,
+                createdAt: serverTimestamp(),
+            });
+            setStateSnack({
+                open: true,
+                message: 'Email sent successfully',
+                severity: 'success',
+            });
+        } catch (error: any) {
+            setStateSnack({
+                open: true,
+                message: 'Failed to send email',
+                severity: "error",
+            });
+        } finally {
+            setLoading(false);
+            setName('');
+            setEmail('');
+            setMessage('');
+        }
     };
 
     return (
@@ -17,12 +93,12 @@ const SectionContact = () => {
             <div className="w-full max-w-7xl flex flex-col lg:flex-row">
                 {/* Image Section */}
                 <div className="hidden md:flex justify-center lg:justify-between items-center w-full lg:w-1/2 mb-8 lg:mb-0">
-                    <div className="w-full max-w-[420px] h-[400px] sm:h-[450px] md:h-[500px] bg-[#feb173] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px] shadow-lg flex items-end">
-                        <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full max-w-[420px] h-[400px] sm:h-[450px] md:h-[500px] bg-[#feb173] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px] shadow-lg flex items-end overflow-hidden">
+                        <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px]">
                             <Image
                                 src={Foto}
                                 alt="Damian"
-                                className="w-[550px] h-auto rounded-full md:rounded-[70px] pb-14"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     </div>
@@ -30,59 +106,79 @@ const SectionContact = () => {
 
                 {/* Form Section */}
                 <div className="w-full lg:w-1/2 px-4 sm:px-10 md:px-16 lg:px-20 flex flex-col space-y-4">
-                    <motion.h1
+                    <h1
                         ref={ref}
                         className="text-4xl sm:text-5xl md:text-6xl font-semibold text-darkBlue mb-4 text-center lg:text-left"
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={fadeInUp}
-                        transition={{ duration: 0.5 }}
                     >
                         Contact <span className="text-orange">Me</span>
-                    </motion.h1>
+                    </h1>
 
-                    <motion.input
+                    <input
                         type="text"
                         placeholder="Name"
-                        className="w-full p-2 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition"
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={fadeInUp}
-                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="w-full py-3 px-4 bg-white border-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition rounded-[24px]"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
 
-                    <motion.input
+                    <input
                         type="email"
                         placeholder="Email"
-                        className="w-full p-2 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition"
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={fadeInUp}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        className="w-full py-3 px-4 bg-white border-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition rounded-[20px]"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <motion.textarea
+                    <textarea
                         placeholder="Message"
-                        className="w-full h-32 sm:h-40 p-2 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition resize-none"
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={fadeInUp}
-                        transition={{ duration: 0.5, delay: 0.7 }}
-                    ></motion.textarea>
+                        className="w-full h-32 sm:h-40 bg-white py-3 px-4 border-2 border-gray-300 focus:outline-none focus:border-[#feb173] transition resize-none rounded-[20px]"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                    ></textarea>
 
                     <div className="flex justify-center lg:justify-start">
-                        <motion.button
-                            className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 w-28 sm:w-32 bg-none text-black border-[1px] border-lightBlack rounded-[50px] hover:bg-orange hover:text-white hover:border-none transition-all duration-500"
-                            initial="hidden"
-                            animate={inView ? "visible" : "hidden"}
-                            variants={fadeInUp}
-                            transition={{ duration: 0.5, delay: 0.8 }}
+                        <button
+                            className="px-[20px] sm:px-[40px] py-[15px] sm:py-[20px] bg-orange rounded-[50px] text-white transition duration-300 border border-transparent hover:bg-white hover:text-orange hover:border-orange"
+                            onClick={sendEmail}
                         >
-                            Send
-                        </motion.button>
+                            {loading ? (
+                                <CircularProgress size={26} color="inherit" />
+                            ) : (
+                                'Send'
+                            )}
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Snackbar for notifications */}
+            <Snackbar
+                open={stateSnack.open}
+                onClose={handleClose}
+                autoHideDuration={3000}
+            >
+                <SnackbarContent
+                    message={
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            {stateSnack.severity === 'success' ? (
+                                <CheckCircleIcon style={{ color: 'white' }} />
+                            ) : (
+                                <ErrorIcon style={{ color: 'white' }} />
+                            )}
+                            <span style={{ marginLeft: 8 }}>{stateSnack.message}</span>
+                        </span>
+                    }
+                    style={{
+                        backgroundColor: stateSnack.severity === 'success' ? '#FD853A' : '#FD853A',
+                        borderRadius: '40px',
+                    }}
+                    action={[
+                        <IconButton key="close" aria-label="close" onClick={handleClose} sx={{ color: "white", fontSize: "24px" }}>
+                            <span>&times;</span>
+                        </IconButton>
+                    ]}
+                />
+            </Snackbar>
         </section>
     );
 };

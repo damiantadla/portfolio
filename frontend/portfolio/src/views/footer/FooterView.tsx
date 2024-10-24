@@ -143,33 +143,35 @@ const FooterView = () => {
                         <h1 className="text-4xl md:text-6xl font-semibold">
                             Lets Connect there
                         </h1>
-                        <button
-                            className="hidden md:flex w-[202px] items-center justify-center bg-orange px-[20px] py-[10px] rounded-[60px] group">
-                            <p className="text-2xl">Hire me</p>
-                            <svg
-                                width="43"
-                                height="43"
-                                viewBox="0 0 43 43"
-                                fill="none"
-                                className="transition-transform duration-500 group-hover:rotate-45"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M12.75 29.8311L30.25 12.3311"
-                                    stroke="white"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M12.75 12.3311H30.25V29.8311"
-                                    stroke="white"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </button>
+                        <Link href="/resume"
+                            className="hidden md:flex items-center justify-center bg-orange py-[10px] px-[20px] rounded-[60px] group ">
+                            <div className="mx-auto flex items-center justify-center">
+                                <p className="text-2xl pl-2">Hire me</p>
+                                <svg
+                                    width="43"
+                                    height="43"
+                                    viewBox="0 0 43 43"
+                                    fill="none"
+                                    className="transition-transform duration-500 group-hover:rotate-45"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M12.75 29.8311L30.25 12.3311"
+                                        stroke="white"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                    <path
+                                        d="M12.75 12.3311H30.25V29.8311"
+                                        stroke="white"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </Link>
                     </div>
 
                     <LineSvg/>
@@ -182,7 +184,7 @@ const FooterView = () => {
                                 className="ml-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-500 ease-in-out text-sm font-light">
                             Created by
                              </span>
-                                    <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-1">
+                                    <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-0">
                                         TADLA
                                     </h1>
                                 </div>

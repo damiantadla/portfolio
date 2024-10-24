@@ -18,6 +18,7 @@ import Vue from "./iconTechnologies/vuejs.svg";
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 // Zmieniony komponent Button
 const Button = ({ text, onClick, active }: { text: string; onClick: () => void; active: boolean }) => {
@@ -66,20 +67,22 @@ const SectionPortfolio = () => {
     };
 
     return (
-        <section className="flex flex-col items-center justify-center min-h-[60vh] lg:h-[90vh] bg-white max-w-7xl mx-auto px-4 lg:px-0 py-20">
+        <section className="flex flex-col items-center justify-center min-h-[60vh] bg-white max-w-7xl mx-auto px-4 lg:px-0 py-20">
             <div className="flex flex-col lg:flex-row justify-between items-center mb-8 lg:mb-16 w-full">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center lg:text-left mb-8 lg:mb-0 lg:w-1/2">
                     Let's have a look at my{" "}
                     <span className="text-orange">Portfolio</span>
                 </h1>
-                <button className="px-[20px] sm:px-[40px] py-[15px] sm:py-[20px] bg-orange rounded-[50px] text-white">
+                <Link href="/services"
+                    className="px-[20px] sm:px-[40px] py-[15px] sm:py-[20px] bg-orange rounded-[50px] text-white transition duration-300 border border-transparent hover:bg-white hover:text-orange hover:border-orange">
                     See All
-                </button>
+                </Link>
             </div>
 
             <div className="my-10 lg:my-20 w-full min-h-[560px] xl:min-h-[460px]">
                 <AnimatePresence>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 justify-items-center items-center">
+                    <div
+                        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 justify-items-center items-center">
                         {filteredTechnologies.map((tech, index) => (
                             <motion.div
                                 key={index}
@@ -90,7 +93,9 @@ const SectionPortfolio = () => {
                                 exit="exit"
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                                <Image className="h-16 sm:h-20 md:h-24" src={tech.src} alt={tech.label} />
+                                <div className="w-[100px] h-[100px] flex justify-center items-center">
+                                    <Image className="" src={tech.src} alt={tech.label} />
+                                </div>
                                 <p className="text-center text-lightBlack group-hover:text-orange transition-colors duration-300">
                                     {tech.label}
                                 </p>

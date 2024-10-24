@@ -11,8 +11,11 @@ import FbLogo from "../../../public/media/facebook.svg";
 import GithubLogo from "../../../public/media/github.svg"
 import LinkedinLogo from "../../../public/media/linkedin.svg"
 
+
 const NavComponent = () => {
     const pathname = usePathname();
+
+
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -20,7 +23,6 @@ const NavComponent = () => {
         const handleScroll = () => {
             const isScrolled = window.scrollY > 50;
             setScrolled(isScrolled);
-            console.log(window.scrollY, isScrolled); // Log scroll position and state
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -30,82 +32,89 @@ const NavComponent = () => {
     }, []);
 
     useEffect(() => {
-        console.log("Scrolled state:", scrolled);
     }, [scrolled]);
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
+
 
     return (
         <>
             <nav className="hidden xl:block bg-lightBlack w-11/12 max-w-7xl h-20 rounded-full mt-8 mx-auto text-xl p-3">
                 <ul className="w-full h-full flex justify-between items-center text-white">
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/">Home</Link>
-                    </li>
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/about' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/about">About</Link>
-                    </li>
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/services' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/services">Service</Link>
-                    </li>
+                    <Link href="/"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        Home
+                    </Link>
+                    <Link href="/about"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/about' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        About
+                    </Link>
+                    <Link href="/services"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/services' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        Services
+                    </Link>
                     <li className="flex justify-center w-60 items-center mx-auto group">
                         <Image src={Logo} alt="Logo" className="w-12"/>
                         <div className="flex flex-col justify-center">
-                            <span
-                                className="ml-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-500 ease-in-out text-sm font-light">
-                                Created by
-                            </span>
-                            <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-1">
+                    <span
+                        className="ml-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-500 ease-in-out text-sm font-light">
+                        Created by
+                    </span>
+                            <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-0">
                                 TADLA
                             </h1>
                         </div>
                     </li>
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/resume' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/resume">Resume</Link>
-                    </li>
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/projects' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/projects">Projects</Link>
-                    </li>
-                    <li className={`flex-grow mx-auto text-center ${pathname === '/contact' ? 'bg-orange m-4 py-4 rounded-full' : 'hover:text-orange'}`}>
-                        <Link href="/contact">Contact</Link>
-                    </li>
+                    <Link href="/resume"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/resume' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        Resume
+                    </Link>
+                    <Link href="/projects"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/projects' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        Projects
+                    </Link>
+                    <Link href="/contact"
+                          className={`flex-grow mx-auto text-center m-4 py-4 ${pathname === '/contact' ? 'bg-orange rounded-full' : 'hover:text-orange'}`}>
+                        Contact
+                    </Link>
                 </ul>
             </nav>
             <div
-                className={`fixed xl:hidden w-full h-20 top-0 left-0 z-50 transition-all duration-500 ease-in-out  ${
+                className={`fixed xl:hidden w-full h-20 top-0 left-0 z-20 transition-all duration-500 ease-in-out  ${
                     scrolled ? 'bg-white bg-opacity-90' : 'bg-[]'
                 }`}
             >
-                <div className="fixed xl:hidden justify-end top-6 right-4 z-40" onClick={toggleMenu}>
-                    <svg width="45" height="36" viewBox="0 0 45 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className="fixed xl:hidden justify-end top-6 right-4 z-30" onClick={toggleMenu}>
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 3H42.5M2.5 18H42.5M2.5 33H42.5" stroke="black" strokeWidth="5"
                               strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </div>
 
-                <div className="fixed xl:hidden top-4 left-4 z-40">
-                    <div className="flex justify-start w-60 items-center mx-auto group">
-                        <Image src={Logo} alt="Logo" className="w-12"/>
-                        <div className="flex flex-col justify-center">
+                <div className="fixed xl:hidden top-4 left-4 z-100">
+                    <Link href="/">
+                        <div className="flex justify-start w-60 items-center mx-auto group">
+                            <Image src={Logo} alt="Logo" className="w-12"/>
+                            <div className="flex flex-col justify-center">
                             <span
                                 className="ml-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-1 transition-all duration-500 ease-in-out text-sm font-light">
                                 Created by
                             </span>
-                            <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-0">
-                                TADLA
-                            </h1>
+                                <h1 className="font-bold text-2xl tracking-widest ml-2 transition-all duration-500 ease-in-out -translate-y-2 group-hover:translate-y-0">
+                                    TADLA
+                                </h1>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
 
 
             <div
-                className={`fixed h-screen inset-0 bg-lightBlack text-white transition-transform duration-500 translate-x-0 ${menuOpen ? "translate-x-0" : "translate-x-full"} z-20`}
-                style={{zIndex: 40}}
+                className={`fixed h-screen inset-0 bg-lightBlack text-white transition-transform duration-500 translate-x-0 ${menuOpen ? "translate-x-0" : "translate-x-full"} z-50`}
             >
                 <div className="h-full flex flex-col justify-between items-end">
-                    <div onClick={toggleMenu} className="w-full flex flex-col justify-between mt-4 px-4">
+                    <div onClick={toggleMenu} className="w-full flex flex-col justify-between mt-4 x-4">
                         <div className="flex justify-between">
                             <Image src={Logo} alt="Logo" className="h-[64px] w-[64px]"/>
                             <svg fill="#fff" width="64px" height="64px" viewBox="0 0 24 24" id="cross"
@@ -126,9 +135,9 @@ const NavComponent = () => {
                         </div>
                         <ul className="flex flex-col items-end justify-center space-y-8 text-3xl pr-12 pt-20 ">
                             <li className={`text-center ${pathname === '/' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>
-                            <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+                                <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
                             </li>
-                            <li className={`text-center ${pathname === '/about' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>
+                            <li className={`text-center ${pathname === '/about' ? 'bg-orange rounded-full' : ''}`}>
                                 <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
                             </li>
                             <li className={`text-center ${pathname === '/services' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>

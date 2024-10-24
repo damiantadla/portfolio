@@ -3,14 +3,14 @@ const ServicesComponent = () => {
         <>
             <div
                 style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden' }}
-                className="group"
+                className="group w-full h-auto max-w-xs md:max-w-sm xl:max-w-md"
             >
                 {/* SVG with the image */}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 417 508"
                     fill="none"
-                    className="w-[317px] h-[408px] xl:w-[417px] lg:h-[508px] mx-auto"
+                    className="w-[250px] h-[300px] sm:w-[317px] sm:h-[408px] xl:w-[417px] xl:h-[508px] mx-auto"
                 >
                     <defs>
                         <radialGradient
