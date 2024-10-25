@@ -337,7 +337,7 @@ const ChatBotAI: React.FC = () => {
                                         {msg.user ? (
                                             <>
                                                 <div
-                                                    className="bg-[#feb273] px-4 py-3 ml-8 rounded-l-lg rounded-b-lg text-white text-[16px]">
+                                                    className="bg-[#feb273] px-4 py-3 ml-8 rounded-l-lg rounded-b-lg text-white text-[16px] ">
                                                     {msg.text}
                                                 </div>
                                                 <p className="text-date font-normal text-xs text-right pt-1">
