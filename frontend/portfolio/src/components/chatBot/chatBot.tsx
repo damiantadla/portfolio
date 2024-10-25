@@ -215,7 +215,7 @@ const ChatBotAI: React.FC = () => {
                 setMessages((prevMessages) => [
                     ...prevMessages,
                     {
-                        text: botReply || "Przykro mi, nie potrafię pomóc w tej sprawie. Spróbuj zapytać mnie o coś innego.",
+                        text: botReply || "Przykro mi, nie potrafię pomóc w tej sprawie. Spróbuj zapytać mnie o coś innego. ",
                         createdAt: time,
                         user: false,
                         link: link
