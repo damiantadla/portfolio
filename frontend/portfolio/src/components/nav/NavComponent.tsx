@@ -111,33 +111,36 @@ const NavComponent = () => {
 
 
             <div
-                className={`fixed h-screen inset-0 bg-lightBlack text-white transition-transform duration-500 translate-x-0 ${menuOpen ? "translate-x-0" : "translate-x-full"} z-50`}
+                className={`fixed h-screen w-screen md:w-1/2 right-0 top-0 bg-lightBlack text-white transition-transform duration-500 transform ${
+                    menuOpen ? "translate-x-0" : "translate-x-full"
+                } z-50`}
             >
                 <div className="h-full flex flex-col justify-between items-end">
-                    <div onClick={toggleMenu} className="w-full flex flex-col justify-between mt-4 x-4">
-                        <div className="flex justify-between">
+                    <div onClick={toggleMenu} className="w-full flex flex-col justify-between mt-4 px-4">
+                        <div className="flex justify-between mx-4">
                             <Image src={Logo} alt="Logo" className="h-[64px] w-[64px]"/>
-                            <svg fill="#fff" width="64px" height="64px" viewBox="0 0 24 24" id="cross"
-                                 data-name="Flat Line"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-
+                            <svg
+                                fill="#fff"
+                                width="64px"
+                                height="64px"
+                                viewBox="0 0 24 24"
+                                id="cross"
+                                data-name="Flat Line"
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#fff"
+                            >
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
-
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
-
                                 <g id="SVGRepo_iconCarrier">
-
                                     <path id="primary" d="M19,19,5,5M19,5,5,19"/>
-
                                 </g>
-
                             </svg>
                         </div>
                         <ul className="flex flex-col items-end justify-center space-y-8 text-3xl pr-12 pt-20 ">
                             <li className={`text-center ${pathname === '/' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>
                                 <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
                             </li>
-                            <li className={`text-center ${pathname === '/about' ? 'bg-orange rounded-full' : ''}`}>
+                            <li className={`text-center ${pathname === '/about' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>
                                 <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
                             </li>
                             <li className={`text-center ${pathname === '/services' ? 'bg-orange px-8 py-4 rounded-full' : ''}`}>
@@ -156,18 +159,22 @@ const NavComponent = () => {
                     </div>
                     <div className="flex mx-auto mb-4">
                         <a href="https://www.facebook.com/damian.tadla" target="_blank" rel="noopener noreferrer">
-                            <Image src={FbLogo} alt="Facebook logo" className="w-16 h-16"/>
+                            <Image src={FbLogo} alt="Facebook logo" className="w-12 h-12 lg:w-16 lg:h-16"/>
                         </a>
                         <a href="https://github.com/damiantadla" target="_blank" rel="noopener noreferrer">
-                            <Image src={GithubLogo} alt="Github logo" className="w-16 h-16"/>
+                            <Image src={GithubLogo} alt="Github logo" className="w-12 h-12 lg:w-16 lg:h-16"/>
                         </a>
-                        <a href="https://www.linkedin.com/in/damian-tadla-b20731200/" target="_blank"
-                           rel="noopener noreferrer">
-                            <Image src={LinkedinLogo} alt="Linkedin logo" className="w-16 h-16"/>
+                        <a
+                            href="https://www.linkedin.com/in/damian-tadla-b20731200/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Image src={LinkedinLogo} alt="Linkedin logo" className="w-12 h-12 lg:w-16 lg:h-16"/>
                         </a>
                     </div>
                 </div>
             </div>
+
         </>
     );
 };

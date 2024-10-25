@@ -58,7 +58,7 @@ const SectionResults = () => {
     ];
 
     return (
-        <section className="relative h-[70vh] md:h-[80vh] bg-[rgba(0,0,0,0.5)] rounded-[20px] md:rounded-[40px] z-10 py-20">
+        <section className="relative h-[80vh] md:h-[80vh] bg-[rgba(0,0,0,0.5)] rounded-[20px] md:rounded-[40px] z-10 py-20">
             <div className="absolute inset-0 rounded-[20px] md:rounded-[40px] bg-back-pattern bg-center bg-cover bg-no-repeat z-0 text-white">
                 <div className="h-full flex flex-col items-center justify-center">
                     <div className="flex justify-between max-w-7xl md:flex mx-auto mb-2 md:mb-20 px-20">

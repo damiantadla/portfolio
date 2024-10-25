@@ -13,11 +13,19 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         lightBlack: '#171717',
-        orange: '#FD853A',
+        orange: '#fd853a',
         darkBlue: "#344054",
+        secondary: "#36509A",
+        ai: "#EDF2FF",
+        date: "#0D082C66",
+        whiteOpacity: "rgba(255,255,255,0.2)",
+        whiteOpacityHover: "rgba(255,255,255,0.3)",
+        avatarGrey: "#EAEAEA",
+        blackLight: "#0D082C"
       },
       backgroundImage: {
         'back-pattern': "url('/background.png')",
+        'back-grey': "url('/backgroundGrey.jpg')",
       }
     },
   },

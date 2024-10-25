@@ -3,7 +3,7 @@ export default function Home() {
 
     return (
         <div className="max-w-7xl mx-auto mt-20">
-            <div className="flex w-full justify-between items-center">
+            <div className="flex flex-col sm:flex-row pt-10 w-full justify-between items-center">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-lightBlack">My <span className="text-orange">Curriculum Vitae</span></h1>
                 <a href={pdfUrl} download="WZÓR-UCHWAŁY-monitoring-garaż-WM-CT-2024 (1).pdf" className="bg-orange text-white px-10 py-5 rounded-[40px] font-semibold" >
                     Download CV

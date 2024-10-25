@@ -17,7 +17,7 @@ const HeaderView = () => {
     };
 
     return (
-        <header className="h-[90vh] w-screen relative">
+        <header className="h-[85vh] w-screen relative ">
             <div className="flex flex-col items-center mt-20 text-center">
                 <motion.button
                     className="mx-auto border-[1px] border-lightBlack px-4 py-1 rounded-full font-semibold"
@@ -49,7 +49,7 @@ const HeaderView = () => {
             </div>
             <div className="max-w-7xl mx-auto flex justify-between mt-24 px-28">
                 <motion.div
-                    className="hidden lg:block w-96"
+                    className="hidden lg:block w-72"
                     initial="hidden"
                     animate="visible"
                     variants={headerAnimation}
@@ -77,9 +77,9 @@ const HeaderView = () => {
                 variants={headerAnimation}
                 transition={{ duration: 0.5, delay: 0.6 }}
             >
-                <div className="relative w-screen h-screen">
-                    <Image src={Foto} alt="Foto"  className="absolute left-1/2 transform -translate-x-1/2 z-20 bottom-0 w-[450px] md:w-[600px] rounded-b-md"/>
-                    <Image src={Elipse} alt="Elipse" className="w-[1000px] hidden md:block absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10"/>
+                <div className="relative w-screen h-1/2">
+                    <Image src={Foto} alt="Foto"  className="absolute left-1/2 transform -translate-x-1/2 z-20 bottom-0 w-[80%]  md:w-[500px] xl:w-[600px] rounded-b-md"/>
+                    <Image src={Elipse} alt="Elipse" className="w-[800px] hidden md:block absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10"/>
                 </div>
             </motion.div>
         </header>

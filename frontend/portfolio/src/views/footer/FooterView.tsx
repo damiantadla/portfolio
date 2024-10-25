@@ -189,7 +189,7 @@ const FooterView = () => {
                                     </h1>
                                 </div>
                             </div>
-                            <p className="hidden md:block w-[500px] my-4">
+                            <p className="hidden xl:block w-[500px] my-4">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a
                                 dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci
                                 elementum egestas lobortis.

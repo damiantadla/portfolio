@@ -53,7 +53,11 @@ const technologies = [
 
 const categories = ["All", "Frontend", "Backend", "DevOps", "Design", "Tools"];
 
-const SectionPortfolio = () => {
+interface SectionPortfolioProps {
+    showButton: boolean;
+}
+
+const SectionPortfolio: React.FC<SectionPortfolioProps> = ({showButton}) => {
     const [activeCategory, setActiveCategory] = useState("All");
 
     const filteredTechnologies = activeCategory === "All"
@@ -73,10 +77,14 @@ const SectionPortfolio = () => {
                     Let's have a look at my{" "}
                     <span className="text-orange">Portfolio</span>
                 </h1>
-                <Link href="/services"
-                    className="px-[20px] sm:px-[40px] py-[15px] sm:py-[20px] bg-orange rounded-[50px] text-white transition duration-300 border border-transparent hover:bg-white hover:text-orange hover:border-orange">
-                    See All
-                </Link>
+                {
+                    showButton && (
+                        <Link href="/services"
+                            className="px-[20px] sm:px-[40px] py-[15px] sm:py-[20px] bg-orange rounded-[50px] text-white transition duration-300 border border-transparent hover:bg-white hover:text-orange hover:border-orange">
+                            See All
+                        </Link>
+                    )
+                }
             </div>
 
             <div className="my-10 lg:my-20 w-full min-h-[560px] xl:min-h-[460px]">
@@ -93,7 +101,7 @@ const SectionPortfolio = () => {
                                 exit="exit"
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                                <div className="w-[100px] h-[100px] flex justify-center items-center">
+                                <div className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] flex justify-center items-center">
                                     <Image className="" src={tech.src} alt={tech.label} />
                                 </div>
                                 <p className="text-center text-lightBlack group-hover:text-orange transition-colors duration-300">

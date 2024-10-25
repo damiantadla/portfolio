@@ -89,11 +89,14 @@ const SectionContact = () => {
     };
 
     return (
-        <section className="h-auto lg:h-[70vh] bg-[#F2F4F7] flex justify-center items-center mx-auto py-10 lg:py-0">
-            <div className="w-full max-w-7xl flex flex-col lg:flex-row">
+        <section className="relative h-auto lg:h-[70vh] bg-back-grey bg-center bg-cover flex justify-center items-center mx-auto py-10 lg:py-0">
+            {/* Overlay White Effect */}
+            <div className="absolute inset-0 bg-white opacity-40 z-0"></div> {/* Biały overlay z przezroczystością */}
+
+            <div className="relative w-full max-w-7xl flex flex-col lg:flex-row z-10"> {/* Dodano z-10 dla elementów treści */}
                 {/* Image Section */}
-                <div className="hidden md:flex justify-center lg:justify-between items-center w-full lg:w-1/2 mb-8 lg:mb-0">
-                    <div className="w-full max-w-[420px] h-[400px] sm:h-[450px] md:h-[500px] bg-[#feb173] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px] shadow-lg flex items-end overflow-hidden">
+                <div className="hidden md:flex justify-center lg:justify-between items-center w-full lg:w-1/2 mb-8 lg:mb-0 ">
+                    <div className="w-full max-w-[420px] h-[400px] sm:h-[450px] md:h-[500px] bg-[#feb173] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px] shadow-lg flex items-end overflow-hidden mx-auto">
                         <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-t-[40px] sm:rounded-t-[50px] md:rounded-[70px]">
                             <Image
                                 src={Foto}
@@ -104,7 +107,6 @@ const SectionContact = () => {
                     </div>
                 </div>
 
-                {/* Form Section */}
                 <div className="w-full lg:w-1/2 px-4 sm:px-10 md:px-16 lg:px-20 flex flex-col space-y-4">
                     <h1
                         ref={ref}
