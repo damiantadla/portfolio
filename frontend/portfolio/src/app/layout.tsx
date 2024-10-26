@@ -4,7 +4,7 @@ import "./globals.css";
 import NavComponent from "@/components/nav/NavComponent";
 import SectionSendEmail from "@/views/sectionSendEmail/SectionSendEmail";
 import FooterView from "@/views/footer/FooterView";
-import ChatBot from "@/components/chatBot/chatBot";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +38,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       <NavComponent />
-      <ChatBot />
         {children}
       <SectionSendEmail/>
       <FooterView/>
