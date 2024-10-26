@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Cross from "@/app/icon/Frame.svg";
-import PrimaryLogo from "@/app/icon/PrimaryLogo.svg";
-import {LoaderDots} from "@thumbtack/thumbprint-react";
 import EmojiIcon from "@/app/icon/EmojiIcon.svg";
 import Arrow from "@/app/icon/Arrow.svg";
 import Picker, {EmojiClickData} from "emoji-picker-react";
@@ -358,7 +356,7 @@ const ChatBotAI: React.FC = () => {
                                                         }`}
                                                     >
                                                         {loading && index === messages.length - 1 ? (
-                                                            <LoaderDots size="small" theme="muted"/>
+                                                            <div></div>
                                                         ) : (
 
 
