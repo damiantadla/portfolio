@@ -72,7 +72,6 @@ jobs:
           script: |
             cd /home/ftpuser/var/www/portfolio/frontend/portfolio
             npm install 
-            npm install --save groq-sdk
             npm run build
       - name: Execute deployment script
         uses: appleboy/ssh-action@v0.1.4
