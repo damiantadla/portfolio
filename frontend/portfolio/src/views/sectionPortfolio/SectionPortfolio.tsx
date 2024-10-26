@@ -104,7 +104,7 @@ const SectionPortfolio: React.FC<SectionPortfolioProps> = ({showButton}) => {
                                 <div className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] flex justify-center items-center">
                                     <Image className="" src={tech.src} alt={tech.label} />
                                 </div>
-                                <p className="text-center text-lightBlack group-hover:text-orange transition-colors duration-300">
+                                <p className="text-center text-lightBlack group-hover:text-orange transition-colors duration-300 mt-4">
                                     {tech.label}
                                 </p>
                             </motion.div>

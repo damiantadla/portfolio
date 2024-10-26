@@ -13,8 +13,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 
 
 const client = axios.create({
-    baseURL: 'https://europe-central2-oleanna-dev.cloudfunctions.net/ai/ai',
-    // baseURL: 'http://127.0.0.1:5001/oleanna-dev/europe-central2/ai/ai',
+    baseURL: 'http://localhost:3000/api/chat',
 });
 
 const config: AxiosRequestConfig = {

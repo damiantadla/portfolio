@@ -1,5 +1,5 @@
 export default function Home() {
-    const pdfUrl = "/WZÓR-UCHWAŁY-monitoring-garaż-WM-CT-2024 (1).pdf";
+    const pdfUrl = "/Damian-Tadla-CV.pdf";
 
     return (
         <div className="max-w-7xl mx-auto mt-20">
