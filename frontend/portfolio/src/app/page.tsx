@@ -25,7 +25,7 @@ export default function Home() {
                 <SectionMyServices />
                 <SectionWorkExp />
                 <SectionContact />
-                <SectionPortfolio />
+                <SectionPortfolio showButton={true}/>
                 <SectionResults />
             </main>
         </>
