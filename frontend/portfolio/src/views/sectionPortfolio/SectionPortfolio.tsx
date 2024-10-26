@@ -20,7 +20,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-// Zmieniony komponent Button
+
 const Button = ({ text, onClick, active }: { text: string; onClick: () => void; active: boolean }) => {
     return (
         <button
