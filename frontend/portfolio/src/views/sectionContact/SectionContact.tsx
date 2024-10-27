@@ -46,7 +46,7 @@ const SectionContact = () => {
         if (!validationEmail(email)) {
             setStateSnack({
                 open: true,
-                message: 'Invalid email address',
+                message: 'Invalid email address ',
                 severity: 'error',
             });
             return;
