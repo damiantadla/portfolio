@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
     "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.1.4",
     "@react-pdf-viewer/core": "^3.12.0",
