@@ -12,8 +12,8 @@ import Foto from "../../../public/damiablack.png";
 const HeaderView = () => {
     // Definicja animacji
     const headerAnimation = {
-        hidden: { opacity: 0, y: -50 }, // Ukryte
-        visible: { opacity: 1, y: 0 }, // Widoczne
+        hidden: { opacity: 0, y: -50 },
+        visible: { opacity: 1, y: 0 },
     };
 
     return (
@@ -24,7 +24,7 @@ const HeaderView = () => {
                     initial="hidden"
                     animate="visible"
                     variants={headerAnimation}
-                    transition={{ duration: 0.5, delay: 0.1 }} // Czas trwania animacji
+                    transition={{ duration: 0.5, delay: 0.1 }}
                 >
                     Hello!
                 </motion.button>
@@ -71,14 +71,19 @@ const HeaderView = () => {
                 </motion.div>
             </div>
             <motion.div
-                className="flex justify-center w-full mt-auto absolute bottom-0" // Flex container for centering Elipse
+                className="flex justify-center w-full mt-auto absolute bottom-0"
                 initial="hidden"
                 animate="visible"
                 variants={headerAnimation}
                 transition={{ duration: 0.5, delay: 0.6 }}
             >
                 <div className="relative w-screen h-1/2">
-                    <Image src={Foto} alt="Foto"  className="absolute left-1/2 transform -translate-x-1/2 z-20 bottom-0 w-[80%]  md:w-[500px] xl:w-[600px] rounded-b-md"/>
+                    <Image
+                        src={Foto}
+                        alt="Foto"
+                        className="absolute left-1/2 transform -translate-x-1/2 z-20 bottom-0 w-[100%] sm:w-[70%] md:w-[50%] lg:w-[30%] xl:w-[24%] max-h-[60vh] rounded-b-md object-cover"
+                    />
+
                     <Image src={Elipse} alt="Elipse" className="w-[800px] hidden md:block absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10"/>
                 </div>
             </motion.div>

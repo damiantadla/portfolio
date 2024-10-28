@@ -74,8 +74,8 @@ const SectionPortfolio: React.FC<SectionPortfolioProps> = ({showButton}) => {
         <section className="flex flex-col items-center justify-center min-h-[60vh] bg-white max-w-7xl mx-auto px-4 lg:px-0 py-20">
             <div className="flex flex-col lg:flex-row justify-between items-center mb-8 lg:mb-16 w-full">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center lg:text-left mb-8 lg:mb-0 lg:w-1/2">
-                    Let's have a look at my{" "}
-                    <span className="text-orange">Portfolio</span>
+                    Languages & Frameworks
+                    <span className="text-orange"> I Use</span>
                 </h1>
                 {
                     showButton && (
@@ -101,7 +101,7 @@ const SectionPortfolio: React.FC<SectionPortfolioProps> = ({showButton}) => {
                                 exit="exit"
                                 transition={{ duration: 0.5, ease: "easeInOut" }}
                             >
-                                <div className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] flex justify-center items-center">
+                                <div className="w-[60px] h-[60px] lg:w-[85px] lg:h-[85px] flex justify-center items-center">
                                     <Image className="" src={tech.src} alt={tech.label} />
                                 </div>
                                 <p className="text-center text-lightBlack group-hover:text-orange transition-colors duration-300 mt-4">

@@ -190,9 +190,7 @@ const FooterView = () => {
                                 </div>
                             </div>
                             <p className="hidden xl:block w-[500px] my-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue interdum ligula a
-                                dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci
-                                elementum egestas lobortis.
+                                Welcome to my portfolio, showcasing my projects in design and development. Explore my work to see how I bring ideas to life and solve challenges effectively.
                             </p>
                             <div className="flex mb-4">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="" className="m-1"

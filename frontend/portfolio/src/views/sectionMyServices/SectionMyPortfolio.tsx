@@ -24,13 +24,13 @@ const SectionMyPortfolio = () => {
 
     return (
         <section
-            className="relative h-[200vh] sm:h-[160vh] md:h-[90vh] xl:h-[90vh] 2xl:h-[90vh] 3xl:h-[40vh] bg-[rgba(0,0,0,0.5)] rounded-[40px] z-10 overflow-hidden"
+            className="relative h-[200vh] sm:h-[160vh] md:h-[92vh] xl:h-[92vh] 2xl:h-[92vh] 3xl:h-[40vh] bg-[rgba(0,0,0,0.5)] rounded-[40px] z-10 overflow-hidden"
             ref={ref}
         >
             <div className="absolute inset-0 rounded-[40px] bg-back-pattern bg-center bg-cover bg-no-repeat z-0">
                 <div className="h-full flex flex-col justify-center items-center py-20">
                     <div
-                        className="w-full flex flex-col md:flex-row sm:items-center xl:mx-auto justify-between text-white mb-16 md:mb-20 max-w-screen-xl px-4 sm:px-6 lg:px-8 text-center md:text-start"
+                        className="w-full flex flex-col md:flex-row sm:items-start xl:mx-auto justify-between text-white my-16 md:mb-20 max-w-screen-xl px-4 sm:px-6 lg:px-8 text-center md:text-center"
                     >
                         <motion.h2
                             className="text-3xl sm:text-4xl md:text-5xl font-semibold"
@@ -41,12 +41,12 @@ const SectionMyPortfolio = () => {
                             My <span className="text-orange">Portfolio</span>
                         </motion.h2>
                         <motion.p
-                            className="w-[90%] sm:w-[70%] md:w-[50%] xl:w-[450px] mt-4 xl:text-2xl text-center mx-auto md:text-start md:mx-0"
+                            className="w-[90%] sm:w-[70%] md:w-[50%] xl:w-[450px] xl:text-2xl text-justify mx-auto md:text-start md:mx-0"
                             initial={{ opacity: 0, y: 50 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
-                            Welcome to my portfolio, showcasing my projects in design and development. Each project highlights my skills and commitment to quality and innovation. Explore my work to see how I bring ideas to life and solve challenges effectively.
+                            Welcome to my portfolio, showcasing my projects in design and development. Explore my work to see how I bring ideas to life and solve challenges effectively.
                         </motion.p>
                     </div>
 
