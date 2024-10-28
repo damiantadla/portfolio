@@ -6,8 +6,9 @@ import { motion } from "framer-motion"; // Import Framer Motion
 import QuoteIcon from "../../../public/quote-up.png";
 import StarsIcon from "../../../public/Frame4.png";
 import Elipse from "../../../public/Ellipse.png";
-
+import dynamic from 'next/dynamic';
 import Foto from "../../../public/damiablack.png";
+const ReactPlayer = dynamic(() => import('react-player/youtube'), { ssr: false });
 
 const HeaderView = () => {
     // Definicja animacji
@@ -15,9 +16,15 @@ const HeaderView = () => {
         hidden: { opacity: 0, y: -50 },
         visible: { opacity: 1, y: 0 },
     };
-
     return (
         <header className="h-[85vh] w-screen relative ">
+            <ReactPlayer
+                url="https://www.youtube.com/watch?v=9jJFgC9yZ5M"
+                playing={true}       // Ustawienie automatycznego odtwarzania
+                muted={false}         // Wymagane do autoodtwarzania w niektórych przeglądarkach
+                width="0%"         // Dopasowanie szerokości wideo do kontenera
+                height="0%"        // Dopasowanie wysokości wideo do kontenera
+            />
             <div className="flex flex-col items-center mt-20 text-center">
                 <motion.button
                     className="mx-auto border-[1px] border-lightBlack px-4 py-1 rounded-full font-semibold"

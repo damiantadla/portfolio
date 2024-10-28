@@ -5,19 +5,12 @@ import SectionMyPortfolio from "@/views/sectionMyServices/SectionMyPortfolio";
 import SectionContact from "@/views/sectionContact/SectionContact";
 import SectionResults from "@/views/sectionResults/SectionResults";
 import SectionPortfolio from "@/views/sectionPortfolio/SectionPortfolio";
-import { initializeAnalytics } from "@/firebase";
-import { useEffect } from "react";
-import { logEvent } from 'firebase/analytics';
-import { analytics } from '../firebase';
+import dynamic from 'next/dynamic';
+
+// Dynamiczny import ReactPlayer z wyłączonym SSR
+const ReactPlayer = dynamic(() => import("react-player/youtube"), { ssr: false });
 
 export default function Home() {
-    useEffect(() => {
-        const initAnalytics = async () => {
-            await initializeAnalytics();
-        };
-        initAnalytics();
-    }, []);
-
     return (
         <>
             <HeaderView />
@@ -25,7 +18,7 @@ export default function Home() {
                 <SectionMyPortfolio />
                 <SectionWorkExp />
                 <SectionContact />
-                <SectionPortfolio showButton={true}/>
+                <SectionPortfolio showButton={true} />
                 <SectionResults />
             </main>
         </>
