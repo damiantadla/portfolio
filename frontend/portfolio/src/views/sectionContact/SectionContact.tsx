@@ -74,7 +74,7 @@ const SectionContact = () => {
                 message: 'Email sent successfully',
                 severity: 'success',
             });
-        } catch (error){
+        } catch (error){// eslint-disable-line @typescript-eslint/no-unused-vars
             setStateSnack({
                 open: true,
                 message: 'Failed to send email',

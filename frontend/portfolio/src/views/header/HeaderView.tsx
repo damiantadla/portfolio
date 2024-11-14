@@ -34,7 +34,7 @@ const HeaderView = () => {
                     variants={headerAnimation}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    I'm <span className="text-orange">Damian</span>,
+                    I&apos;m <span className="text-orange">Damian</span>,
                 </motion.p>
                 <motion.p
                     className="text-5xl font-semibold"
