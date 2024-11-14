@@ -5,7 +5,6 @@ import "./globals.css";
 import NavComponent from "@/components/nav/NavComponent";
 import SectionSendEmail from "@/views/sectionSendEmail/SectionSendEmail";
 import FooterView from "@/views/footer/FooterView";
-import ReactPlayer from 'react-player/youtube'
 
 
 const geistSans = localFont({

@@ -1,8 +1,3 @@
-import HeaderView from "@/views/header/HeaderView";
-import SectionMyPortfolio from "@/views/sectionMyServices/SectionMyPortfolio";
-import SectionWorkExp from "@/views/sectionWorkExp/SectionWorkExp";
-import SectionContact from "@/views/sectionContact/SectionContact";
-import SectionResults from "@/views/sectionResults/SectionResults";
 import SectionPortfolio from "@/views/sectionPortfolio/SectionPortfolio";
 
 export default function Home() {

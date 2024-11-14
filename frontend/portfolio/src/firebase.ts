@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics, isSupported } from "firebase/analytics";
-import { getFirestore } from 'firebase/firestore';
+import { Analytics, getAnalytics, isSupported} from "firebase/analytics";
+import {getFirestore} from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -18,8 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 
-// @ts-ignore
-export let analytics;
+export let analytics: Analytics;
 export const initializeAnalytics = async () => {
     const supported = await isSupported();
     if (supported) {
