@@ -66,7 +66,7 @@ const SectionSendEmail = ()  => {
                 severity:'success',
 
             });
-        } catch (error: any) {
+        } catch (error) {
             setStateSnack({
                 open: true,
                 message: 'Failed to send email',
